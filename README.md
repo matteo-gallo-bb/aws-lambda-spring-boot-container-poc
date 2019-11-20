@@ -1,0 +1,1 @@
+# aws-lambda-spring-boot-container-poc
