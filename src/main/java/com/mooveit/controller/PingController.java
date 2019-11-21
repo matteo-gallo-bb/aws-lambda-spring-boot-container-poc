@@ -20,4 +20,10 @@ public class PingController {
     public Map<String, String> ping() {
         return pingService.ping();
     }
+
+
+    @RequestMapping(path = "/pong", method = RequestMethod.GET)
+    public String pong() {
+        return pingService.pong();
+    }
 }
