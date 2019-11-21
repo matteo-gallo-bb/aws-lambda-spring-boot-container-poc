@@ -25,7 +25,8 @@ You can use [AWS SAM Local](https://github.com/awslabs/aws-sam-local) to start y
 First, install SAM local:
 
 ```bash
-$ npm install -g aws-sam-local
+$ brew tap aws/tap
+$ brew install aws-sam-cli
 ```
 
 Next, from the project root folder - where the `sam.yaml` file is located - start the API with the SAM Local CLI.
