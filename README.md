@@ -28,16 +28,6 @@ First, install SAM local:
 $ npm install -g aws-sam-local
 ```
 
-with brew
-```bash
-$ brew tap aws/tap
-```
-
-```bash
-$ brew install aws-sam-cli
-```
-
-
 Next, from the project root folder - where the `sam.yaml` file is located - start the API with the SAM Local CLI.
 
 ```bash
