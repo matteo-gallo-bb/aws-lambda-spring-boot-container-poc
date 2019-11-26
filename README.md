@@ -107,3 +107,17 @@ $ curl -s https://xxxxxxx.execute-api.us-west-2.amazonaws.com/Prod/ping | python
     "pong": "Hello, World!"
 }
 ```
+
+It's interesting to compare the performances (running in local) between this POC (java 8 lambda with Spring) and a normal lambda that does the same REST call.
+
+```
+java11      - cold -> Init Duration: 1086.50 ms   Duration: 1126.33 ms    Billed Duration: 1200 ms    Memory Size: 128 MB     Max Memory Used: 78 MB 
+java11      - warm -> Init Duration: 886.54 ms    Duration: 994.98 ms     Billed Duration: 1000 ms    Memory Size: 128 MB     Max Memory Used: 78 MB
+
+Spring Boot - cold -> Init Duration: 6029.70 ms   Duration: 1232.53 ms    Billed Duration: 1300 ms    Memory Size: 512 MB     Max Memory Used: 110 MB 
+Spring Boot - warm -> Init Duration: 5667.28 ms   Duration: 1024.92 ms    Billed Duration: 1100 ms    Memory Size: 512 MB     Max Memory Used: 109 MB 
+```
+
+To better understand those numbers we should consider that we are doing a REST call to a mock endpoint and it takes between 600ms and 1s.
+Knowing this we can come to the conclusion that most of the duration time is due to the REST call and there is no much difference between the two.
+The real difference is in the initialization time and memory usage where Spring has a negative impact, making this solution not viable for most of the use cases.
