@@ -108,6 +108,30 @@ $ curl -s https://xxxxxxx.execute-api.us-west-2.amazonaws.com/Prod/ping | python
 }
 ```
 
+Follow the steps below if you want to run the Spring Boot app in a Docker container.
+
+First build the docker image.
+```build docker image
+mvn clean install -P standalone
+mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+docker build -t mjnav/aws-lambda-spring-boot-container-poc .
+```
+
+Run docker image in a Docker container
+```run Docker
+docker run -p 8080:8080 -t mjnav/aws-lambda-spring-boot-container-poc
+```
+
+Run docker image setting a Spring profile
+```using Spring Profiles
+$ docker run -e "SPRING_PROFILES_ACTIVE=dev" -p 8080:8080 -t mjnav/aws-lambda-spring-boot-container-poc
+```
+
+Debug the Spring Boot app in a Docker container
+```debugging the application in a Docker container
+$ docker run -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t mjnav/aws-lambda-spring-boot-container-poc
+```
+
 It's interesting to compare the performances (running in local) between this POC (java 8 lambda with Spring) and a normal lambda that does the same REST call.
 
 ```
