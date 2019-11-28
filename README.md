@@ -1,7 +1,8 @@
-# aws-lambda-spring-boot-container-poc serverless API
+# aws-lambda-spring-boot-container-poc serverless API with Java 11
 The aws-lambda-spring-boot-container-poc project, created with [`aws-serverless-java-container`](https://github.com/awslabs/aws-serverless-java-container).
 
 The starter project defines a simple `/ping` resource that can accept `GET` requests with its tests.
+This project uses Java 11, you need to have jdk 11 installed and configured.
 
 The project folder also includes a `sam.yaml` file. You can use this [SAM](https://github.com/awslabs/serverless-application-model) file to deploy the project to AWS Lambda and Amazon API Gateway or test in local with [SAM Local](https://github.com/awslabs/aws-sam-local).
 
@@ -114,22 +115,22 @@ First build the docker image.
 ```build docker image
 mvn clean install -P standalone
 mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
-docker build -t mjnav/aws-lambda-spring-boot-container-poc .
+docker build -t matteo-gallo-bb/aws-lambda-spring-boot-container-poc .
 ```
 
 Run docker image in a Docker container
 ```run Docker
-docker run -p 8080:8080 -t mjnav/aws-lambda-spring-boot-container-poc
+docker run -p 8080:8080 -t matteo-gallo-bb/aws-lambda-spring-boot-container-poc
 ```
 
 Run docker image setting a Spring profile
 ```using Spring Profiles
-$ docker run -e "SPRING_PROFILES_ACTIVE=dev" -p 8080:8080 -t mjnav/aws-lambda-spring-boot-container-poc
+$ docker run -e "SPRING_PROFILES_ACTIVE=dev" -p 8080:8080 -t matteo-gallo-bb/aws-lambda-spring-boot-container-poc
 ```
 
 Debug the Spring Boot app in a Docker container
 ```debugging the application in a Docker container
-$ docker run -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t mjnav/aws-lambda-spring-boot-container-poc
+$ docker run -e "JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 8080:8080 -p 5005:5005 -t matteo-gallo-bb/aws-lambda-spring-boot-container-poc
 ```
 
 It's interesting to compare the performances (running in local) between this POC (java 8 lambda with Spring) and a normal lambda that does the same REST call.

@@ -49,7 +49,7 @@ public class StreamLambdaHandlerTest {
         assertFalse(response.isBase64Encoded());
 
         assertTrue(response.getBody().contains("pong"));
-        assertTrue(response.getBody().contains("Hello, World!"));
+        assertTrue(response.getBody().contains("Hello default!"));
 
         assertTrue(response.getMultiValueHeaders().containsKey(HttpHeaders.CONTENT_TYPE));
         assertTrue(response.getMultiValueHeaders().getFirst(HttpHeaders.CONTENT_TYPE).startsWith(MediaType.APPLICATION_JSON));
@@ -66,7 +66,12 @@ public class StreamLambdaHandlerTest {
 
         AwsProxyResponse response = readResponse(responseStream);
         assertNotNull(response);
-        assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatusCode());
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatusCode());
+
+        assertFalse(response.isBase64Encoded());
+
+        assertTrue(response.getMultiValueHeaders().containsKey(HttpHeaders.CONTENT_TYPE));
+        assertTrue(response.getMultiValueHeaders().getFirst(HttpHeaders.CONTENT_TYPE).startsWith(MediaType.APPLICATION_JSON));
     }
 
     private void handle(InputStream is, ByteArrayOutputStream os) {

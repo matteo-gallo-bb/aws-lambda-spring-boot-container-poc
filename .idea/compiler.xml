@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="aws-lambda-spring-boot-container-poc" target="1.8" />
+      <module name="aws-lambda-spring-boot-container-poc" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

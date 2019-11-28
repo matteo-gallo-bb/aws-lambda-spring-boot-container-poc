@@ -21,7 +21,7 @@ public class PingService {
 
     public Map<String, String> ping() {
         Map<String, String> pong = new HashMap<>();
-        pong.put("pong", this.pong());
+        pong.put("pong", response);
         return pong;
     }
 

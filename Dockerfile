@@ -1,4 +1,4 @@
-FROM amazoncorretto:8
+FROM amazoncorretto:11
 VOLUME /tmp
 ARG DEPENDENCY=target/dependency
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
